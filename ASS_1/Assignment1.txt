@@ -1,0 +1,610 @@
+1. Write a query in SQL to display all the information of the employees
+		select *
+		from emp;
+
+2. Write a query in SQL to find the salaries of all employees.
+		select sal
+		from emp;
+
+3. Write a query in SQL to display the unique designations for the employees.
+		select job
+		from emp;
+
+4. Write a query in SQL to list the emp_name and salary is increased by 15% and expressed as no.of Dollars.
+		select ename, 
+		concat('$', sal+sal*0.15) salary
+		from emp;
+		-----------------------------------------------
+		select ename,
+		concat('$', sal*1.15) salary
+		from emp;
+
+5. Write a query in SQL to produce the output of employees name and job as a format of "Employee & Job".
+		select concat(ename, ' ', job) "Employee & Job"
+		from emp;
+
+6. Write a query in SQL to produce the output of employees as follows:
+    Employee
+    JONES(manager).
+		select concat(ename, ' (', job, ')') Employee
+		from emp;
+
+7. Write a query in SQL to list the employees with Hire date in the format like February 22, 1991.
+		select empno, ename, hiredate,
+		date_format(hiredate, "%M %e, %Y")
+		from emp;
+
+8. Write a query in SQL to count the no. of characters with out considering the spaces for each name.
+		select ename,
+		length(ename) Length
+		from emp;
+		-----------------------------------------------
+		select ename,
+		char_length(ename) Length
+		from emp;
+
+9. Write a query in SQL to list the emp_id,salary, and commission of all the employees.
+		select empno, sal, comm
+		from emp;
+
+10. Write a query in SQL to display the unique department with jobs.
+		select deptno, job
+		from emp
+		group by deptno;
+
+11. Write a query in SQL to list the employees who does not belong to department 2001.
+		select empno, ename, job, deptno
+		from emp
+		where not deptno = 2001;
+		-----------------------------------------------
+		select empno, ename, job, deptno
+		from emp
+		where deptno not in (2001);
+
+12. Write a query in SQL to list the employees who joined before 1991.
+		select empno, ename, hiredate, job, deptno
+		from emp
+		where hiredate < '1991';
+
+13. Write a query in SQL to display the average salaries of all the employees who works as ANALYST.
+		select empno, ename, job,
+		avg(sal) Avg_Sal
+		from emp
+		where job = 'ANALYST';
+
+14. Write a query in SQL to display the details of the employee BLAKE.
+		select *
+		from emp
+		where ename = 'BLAKE';
+
+15. Write a query in SQL to display all the details of the employees whose commission is more than their salary.
+		select empno, ename, sal, comm
+		from emp
+		where comm > sal;
+		
+16. Write a query in SQL to list the employees whose salary is more than 3000 after giving 25% increment.
+		select empno, ename, sal
+		from emp
+		where sal*1.25 > 3000; 
+		
+17. Write a query in SQL to list the name of the employees, those having six characters to their name.
+		select ename
+		from emp
+		where char_length(ename) = 6;
+
+18. Write a query in SQL to list the employees who joined in the month January.
+		select empno, ename, hiredate
+		from emp
+		where monthname(hiredate) = 'January';
+
+19. Write a query in SQL to list the name of employees and their manager separated by the string 'works for'.
+		select concat(b.ename, ' works for ', a.ename) 'ENAME'
+		from emp a inner join emp b on b.mgr = a.empno;
+
+20. Write a query in SQL to list all the employees whose designation is CLERK.
+		select *
+		from emp
+		where job = 'CLERK';
+
+21. Write a query in SQL to list the employees whose experience is more than 20 years.
+		select *
+		from emp
+		where floor(datediff(curdate(), hiredate)/365) > 20;
+		
+22. Write a query in SQL to list the employees whose salaries are less than 3500.
+		select *
+		from emp
+		where sal < 3500;
+
+23. Write a query in SQL to list the name, job_name, and salary of any employee whose designation is ANALYST.
+		select ename, job, sal
+		from emp
+		where job = 'ANALYST';
+
+24. Write a query in SQL to list the employees who have joined in the year 1981.
+		select empno, ename, hiredate
+		from emp
+		where year(hiredate) = 1981;
+
+25. Write a query in SQL to list the name, id, hire_date, and salary of all the employees joined before 1 apr 81.
+		select ename, empno, hiredate, sal
+		from emp
+		where hiredate < '1981-04-01';
+
+26. Write a query in SQL to list the employee name, and job_name who are not working under a manager.
+		select ename, job
+		from emp
+		where mgr is null;
+
+27. Write a query in SQL to list all the employees joined on 1st may 81.
+		select empno, ename, hiredate
+		from emp
+		where hiredate = '1981-05-01';
+
+28. Write a query in SQL to list the id, name, salary, and experiences of all the employees working for the manager 7839.
+		select empno, ename, sal,
+		floor(datediff(curdate(), hiredate)/365) exp
+		from emp
+		where mgr = 7839;
+
+29. Write a query in SQL to list the id, name, salary, and experience of all the employees who earn more than 100 as daily salary.
+		select empno, ename, sal, round((sal*12)/365,2) daily, hiredate,
+		floor(datediff(curdate(), hiredate)/365) exp
+		from emp
+		where round((sal*12)/365,2) > 100;
+
+30. Write a query in SQL to list the employees who are retiring after 31-Dec-99 after completion of 8 years of service period.
+
+31. Write a query in SQL to list those employees whose salary is an odd value.
+		select empno, ename, sal
+		from emp
+		where sal%2!=0;
+
+32. Write a query in SQL to list those employees whose salary contain only 3 digits.
+		select empno, ename, sal
+		from emp
+		where length(floor(sal)) = 3;
+
+33. Write a query in SQL to list the employees who joined in the month of APRIL.
+		select empno, ename, hiredate
+		from emp
+		where monthname(hiredate) = 'APRIL';
+
+34. Write a query in SQL to list the employees those who joined in company before 19th of the month.
+		select empno, ename, hiredate
+		from emp
+		where day(hiredate) < 19;
+
+35. Write a query in SQL to list the employees who are SALESMAN and gathered an experience over 10 years.
+		select empno, ename, job, deptno, hiredate
+		from emp
+		where job='SALESMAN' and floor(datediff(curdate(), hiredate)/365);
+		
+36. Write a query in SQL to list the employees of department id 30 or 10 joined in the year 1981.
+		select empno, ename, hiredate, deptno
+		from emp
+		where deptno in (30, 10) and year(hiredate) = 1981;
+
+37. Write a query in SQL to list the employees of department id 30 or 10 joined in the year 1981.
+		select empno, ename, hiredate, deptno
+		from emp
+		where deptno in (30, 10) and year(hiredate) = 1981;
+
+38. Write a query in SQL to list all the employees of designation CLERK in department no 20.
+		select empno, ename, job, deptno
+		from emp
+		where job = 'CLERK' and deptno = 20;
+
+39. Write a query in SQL to list the ID, name, salary, and job_name of the employees for - 
+	1. Annual salary is below 34000 but receiving some commission which should not be more than the salary,
+	2. And designation is SALESMAN and working for department 30, 40.
+		select empno, ename, sal, round(sal*12,2) annual, comm, job, deptno
+		from emp
+		where round(sal*12,2) < 34000 and comm < sal and job = 'SALESMAN' and deptno in (30, 40);
+	
+40. Write a query in SQL to list the employees who are either CLERK or MANAGER.
+		select empno, ename, job
+		from emp
+		where job in ('CLERK', 'MANAGER');
+
+41. Write a query in SQL to list the employees who joined in any year except the month February.
+		select empno, ename, hiredate
+		from emp
+		where monthname(hiredate) != 'February';
+
+42. Write a query in SQL to list the employees who joined in the year 91.
+		select empno, ename, hiredate
+		from emp
+		where year(hiredate) = 1991;
+		
+43. Write a query in SQL to list the employees who joined in the month of June in 1991. 
+		select empno, ename, hiredate
+		from emp
+		where monthname(hiredate) = 'June' and year(hiredate) = 1991;
+
+44. Write a query in SQL to list the employees whose annual salary is within the range 24000 and 50000.
+		select empno, ename, sal, round(sal*12,2) annual
+		from emp
+		where (sal*12) between 24000 and 50000;
+
+45. Write a query in SQL to list the employees who have joined on the following dates 1st May, 20th Feb, and 3rd Dec in the year 1981.
+		select empno, ename, hiredate
+		from emp
+		where hiredate in ('1981-05-01', '1981-02-20', '1981-12-03');
+		
+46. Write a query in SQL to list the employees working under the managers 7566, 7698, 7782.
+		select b.empno, b.ename, b.job, a.ename 'works under', a.job
+		from emp a inner join emp b on b.mgr = a.empno
+		where b.mgr in (7566, 7698, 7782);
+
+47. Write a query in SQL to list the employees who joined after the month JUNE in the year 1982.
+		select empno, ename, hiredate
+		from emp
+		where year(hiredate) > 1982 and month(hiredate) > 6;
+
+48. Write a query in SQL to list the employees who joined in 90s.
+		select empno, ename, hiredate
+		from emp
+		where year(hiredate) between 1990 and 1999;
+
+49. Write a query in SQL to list the managers of department 10 or 20.
+		select empno, ename, job, deptno
+		from emp
+		where job='MANAGER' and deptno in (10, 20);
+		
+50. Write a query in SQL to list the employees, joined in the month FEBRUARY with a salary range between 1001 to 2000.
+		select empno, ename, hiredate, sal
+		from emp
+		where monthname(hiredate) = 'February' and sal between 1001 and 2000;
+
+51. Write a query in SQL to list all the employees who joined before or after 1991.
+		select empno, ename, hiredate
+		from emp
+		where year(hiredate) != 1991;
+
+52. Write a query in SQL to list the employees along with department name.
+		select e.empno, e.ename, d.dname
+		from emp e inner join dept d
+		on e.deptno = d.deptno;
+
+53. Write a query in SQL to list the name, job name, annual salary, department id, department name and grade of the employees who earn 60000 in a year or not working as an ANALYST.
+		select e.ename, e.job, round(e.sal*12,2) annual, d.deptno, d.dname, s.grade
+		from emp e inner join dept d on e.deptno = d.deptno 
+		inner join salgrade s on e.sal between s.losal and s.hisal
+		where (e.sal*12) >= 60000 or e.job != 'ANALYST';
+		
+54. Write a query in SQL to list the name, job name, manager id, salary, manager name, managers salary for those employees whose salary is greater than the salary of their managers.
+		select a.ename, a.job, a.mgr, a.sal, b.ename mgrname, b.sal mgrsal
+		from emp a inner join emp b on a.mgr = b.empno
+		where and a.sal > b.sal;
+
+55. Write a query in SQL to list the employees name, department, salary and commission. For those whose salary is between 2000 and 5000 while location is PERTH.
+		select e.ename, e.deptno, e.sal, e.comm, d.loc
+		from emp e inner join dept d on e.deptno = d.deptno
+		where d.loc = 'PERTH' and e.sal between 2000 and 5000;
+
+56. Write a query in SQL to list the grade, employee name for the department id 10 or 30 but salary grade is not 4 while they joined the company before 1992-12-31.
+		select e.ename, s.grade
+		from emp e inner join salgrade s on e.sal between s.losal and s.hisal
+		where e.deptno in (10,30) and s.grade != 4 and e.hiredate < '1982-12-31';
+		
+57. Write a query in SQL to list the employees whose manager name is JONES.
+		select a.empno, a.ename, a.mgr, b.ename mgrname
+		from emp a inner join emp b on a.mgr = b.empno
+		where b.ename = 'JONES';
+
+58. Write a query in SQL to list the name and salary of FRANK if his salary is equal to max_sal of his grade.
+		select e.empno, e.ename, e.sal
+		from emp e inner join salgrade s on e.sal between s.losal and s.hisal
+		where e.sal = s.hisal;
+
+59. Write a query in SQL to list the employees who are working either MANAGER or ANALYST with a salary range between 2000 to 5000 without any commission.
+		select empno, ename, job, sal, comm
+		from emp
+		where job in ('MANAGER', 'ANALYST') and sal between 2000 and 5000 and comm is null;
+
+60. Write a query in SQL to list the id, name, salary, and location of the employees working at PERTH or MELBOURNE with an experience over 10 years.
+		select e.empno, e.ename, e.sal, d.loc
+		from emp e inner join dept d on e.deptno = d.deptno
+		where d.loc in ('PERTH', 'MELBOURNE') and floor(datediff(curdate(), hiredate)/365) > 10;
+
+61. Write a query in SQL to list the employees along with their location who belongs to SYDNEY, MELBOURNE with a salary range between 2000 and 5000 and joined in 1991.
+		select e.empno, e.ename, e.sal, e.hiredate, d.loc
+		from emp e inner join dept d on e.deptno = d.deptno
+		where d.loc in ('CHICAGO', 'DALLAS') and e.sal between 2000 and 5000 and year(e.hiredate) = 1981;
+
+62. Write a query in SQL to list the employees with their location and grade for RESEARCH department who comes from MELBOURNE or PERTH within the grade 3 to 5 and experience over 5 years.
+		select e.empno, e.ename, e.job, e.sal, d.dname, d.loc, s.grade
+		from emp e inner join dept d on e.deptno = d.deptno
+		inner join salgrade s on e.sal between s.losal and s.hisal
+		where d.loc in ('MELBOURNE', 'PERTH') and s.grade between 3 and 5 and floor(datediff(curdate(), hiredate)/365) > 5;
+
+63. Write a query in SQL to list the employees who are senior to their own manager. 
+		select a.empno, a.ename, a.mgr, a.hiredate, floor(datediff(curdate(), a.hiredate)/365) exp, 
+		b.ename mgrname, b.hiredate, floor(datediff(curdate(), b.hiredate)/365) mgrexp
+		from emp a inner join emp b on a.mgr = b.empno
+		where a.hiredate > b.hiredate;
+
+64. Write a query in SQL to list the employee with their grade for the grade 4.
+		select e.empno, e.ename, s.grade
+		from emp e inner join salgrade s on e.sal between s.losal and s.hisal
+		where s.grade = 4;
+
+65. Write a query in SQL to list the employees of grade 3 in department RESEARCH or OPERATIONS who joined after 1981 and they are not KING or FORD to their name.
+		select e.empno, e.ename, e.hiredate, e.deptno, d.dname, s.grade
+		from emp e inner join dept d on e.deptno = d.deptno
+		inner join salgrade s on e.sal between s.losal and s.hisal
+		where year(e.hiredate) > 1981 and e.ename not in ('KING', 'FORD') and d.dname in ('RESEARCH', 'OPERATIONS') and s.grade = 3;
+
+66. Write a query in SQL to list the employees in the ascending order of their salaries.
+		select empno, ename, sal
+		from emp
+		order by sal;
+
+67. Write a query in SQL to list the details of the employees in ascending order to the department_id and descending order to the jobs.
+		select empno, ename, deptno, job
+		from emp
+		order by deptno, job desc;
+
+68. Write a query in SQL to display all the unique job in descending order.
+		select job
+		from emp
+		group by job
+		order by job desc;
+
+69. Write a query in SQL to list the id, name, monthly salary, daily salary of all the employees in the ascending order of their annual salary.
+		select empno, ename, sal, round((sal*12)/365,2) daily, round(sal*12,2) annual
+		from emp
+		order by round(sal*12,2);
+
+70. Write a query in SQL to list the employees in descending order who are either 'CLERK' or 'ANALYST'.
+		select empno, ename, job
+		from emp
+		where job in ('CLERK', 'ANALYST')
+		order by job desc;
+
+71. Write a query in SQL to display the location of MARTIN.
+		select e.ename, d.loc
+		from emp e inner join dept d on e.deptno = d.deptno
+		where e.ename = 'MARTIN';
+
+72. Write a query in SQL to list the employees in ascending order of seniority who joined on 1-MAY-91 or 3-DEC-91 or 19-JAN-90.
+		select empno, ename, hiredate 
+		from emp
+		where hiredate in ('1991-05-01', '1991-12-03', '1990-01-19')
+		order by timestampdiff(day,hiredate,curdate()) desc;
+
+73. Write a query in SQL to list the employees who are drawing the salary less than 1000 and sort the output in ascending order on salary.
+		select empno, ename, sal
+		from emp
+		where sal < 1000
+		order by sal;
+
+74. Write a query in SQL to list the details of the employees in ascending order on the salary.
+		select empno, ename, sal
+		from emp
+		order by sal;
+
+75. Write a query in SQL to list the employees in ascending order on job name and descending order on employee id.
+		select empno, ename, job
+		from emp
+		order by job, empno desc;
+
+76. Write a query in SQL to list the unique jobs of department 20 and 30 in descending order.
+		select job, deptno
+		from emp
+		where deptno in (20, 30)
+		group by job
+		order by job desc;
+
+77. Write a query in SQL to list all the employees except PRESIDENT and MANAGER in ascending order of salaries.
+		select empno, ename, job, sal
+		from emp
+		where job not in ('PRESIDENT', 'MANAGER')
+		order by sal;
+
+78. Write a query in SQL to list the employees in ascending order of the salary whose annual salary is below 25000.
+		select empno, ename, sal, (sal*12) annual
+		from emp
+		where (sal*12) < 25000
+		order by sal;
+
+79. Write a query in SQL to list the employee id, name, annual salary, daily salary of all the employees in the ascending order of annual salary who works as a SALESMAN.
+		select empno, ename, job, (sal*12) annual, round((sal*12)/365,2) daily
+		from emp
+		where job = 'SALESMAN'
+		order by (sal*12);
+
+80. Write a query in SQL to list the employee id, name, hire_date, current date and experience of the employees in ascending order on their experiences.
+		select empno, ename, hiredate, curdate() as 'today', floor(datediff(curdate(), hiredate)/365) exp
+		from emp
+		order by floor(datediff(curdate(), hiredate)/365);
+
+81. Write a query in SQL to list the employees in ascending order of designations of those, joined after the second half of 1981.
+		select empno, ename, job, hiredate
+		from emp
+		where year(hiredate) >= 1981 and month(hiredate) > 6
+		order by job;
+
+82. Write a query in SQL to list the total information of employees table along with department, and location of all the employees working under ACCOUNTING and RESEARCH in the ascending department no.
+		select *
+		from emp e inner join dept d on e.deptno = d.deptno
+		where d.dname in ('ACCOUNTING', 'RESEARCH')
+		order by e.deptno;
+
+83. Write a query in SQL to display the total information of the employees along with grades in ascending order.
+		select *
+		from emp e inner join salgrade s on e.sal between s.losal and s.hisal
+		order by s.grade;
+
+84. Write a query in SQL to list the name, job name, department, salary, and grade of the employees according to the department in ascending order.
+		select e.ename, e.job, e.sal, e.deptno, d.dname, s.grade
+		from emp e inner join dept d on e.deptno = d.deptno
+		inner join salgrade s on e.sal between s.losal and s.hisal
+		order by dname;
+
+85. Write a query in SQL to list the name, job name, salary, grade and department name of employees except CLERK and sort result set on the basis of highest salary.
+		select e.ename, e.job, e.sal, s.grade, d.dname
+		from emp e inner join dept d on e.deptno = d.deptno
+		inner join salgrade s on e.sal between s.losal and s.hisal
+		where e.job != 'CLERK'
+		order by e.sal desc;
+
+86. Write a query in SQL to list the employee ID, name, salary, department, grade, experience, and annual salary of employees working for department 10 or 20.
+		select e.empno, e.ename, e.sal, d.deptno, d.dname, s.grade, floor(datediff(curdate(), e.hiredate)/365) exp, (e.sal*12) annual
+		from emp e inner join dept d on e.deptno = d.deptno
+		inner join salgrade s on e.sal between s.losal and s.hisal
+		where e.deptno in (10, 20);
+
+87. Write a query in SQL to list the details of the employees along with the details of their departments.
+		select *
+		from emp e inner join dept d on e.deptno = d.deptno;
+
+88. Write a query in SQL to list the employees who are senior to their own MANAGERS.
+		select a.empno, a.ename, a.mgr, a.hiredate, floor(datediff(curdate(), a.hiredate)/365) exp, 
+		b.ename mgrname, b.hiredate, floor(datediff(curdate(), b.hiredate)/365) mgrexp
+		from emp a inner join emp b on a.mgr = b.empno
+		where a.hiredate > b.hiredate;
+
+89. Write a query in SQL to list the employee id, name, salary, and department id of the employees in ascending order of salary who works in the department 10.
+		select empno, ename, sal, deptno
+		from emp
+		where deptno = 10
+		order by sal;
+
+90. Write a query in SQL to find the highest salary from all the employees.
+		select max(sal) maxsal
+		from emp;
+
+91. Write a query in SQL to find the average salary and average total remuneration (salary and commission) for each type of job.
+		select deptno, job, ceil(avg(sal)) avg, ceil(avg(sal+ifnull(comm, 0))) remuneration
+		from emp
+		group by job;
+		
+92. Write a query in SQL to find the total annual salary distributed against each job in the year 1981.
+		select deptno, job, year(hiredate) hireyear, ceil(avg(sal)) avgsal
+		from emp
+		where year(hiredate) = 1981
+		group by job;
+
+93. Write a query in SQL to list the employee id, name, department id, location of all the employees.
+		select e.empno, e.ename, e.deptno, d.loc
+		from emp e inner join dept d on e.deptno = d.deptno;
+
+94. Write a query in SQL to list the employee id, name, location, department of all the departments 10 and 20.
+		select e.empno, e.ename, e.deptno, d.loc, d.dname
+		from emp e inner join dept d on e.deptno = d.deptno
+		where e.deptno in (10, 20);
+
+95. Write a query in SQL to list the employee id, name, location, department of all the departments 10 and 20.
+		select e.empno, e.ename, e.deptno, d.loc, d.dname
+		from emp e inner join dept d on e.deptno = d.deptno
+		where e.deptno in (10, 20);
+
+96. Write a query in SQL to list the manager no and the number of employees working for those managers in ascending order on manager id.
+		select mgr, count(mgr) as '# of people'
+		from emp
+		group by mgr
+		order by mgr;
+
+97. Write a query in SQL to display the number of employee for each job in each department.
+		select job, count(job) as '# of people'
+		from emp
+		group by job;
+
+98. Write a query in SQL to list the department where at least two employees are working.
+		select deptno, count(deptno) as '# of employees'
+		from emp
+		group by deptno
+		having count(deptno) >= 2;
+
+99. Write a query in SQL to display the Grade, Number of employees and maximum salary of each grade.
+		select s.grade, count(e.sal) as '# of employees', s.hisal
+		from emp e inner join salgrade s on e.sal between s.losal and s.hisal
+		group by grade;
+
+100. Write a query in SQL to display the department name, grade, no. of employees where at least two employees are working as a SALESMAN.
+		select d.dname, s.grade, count(*) as '# of employees'
+		from emp e inner join dept d on e.deptno = d.deptno
+		inner join salgrade s on e.sal between s.losal and s.hisal
+		where job = 'SALESMAN'
+		group by d.dname, s.grade
+		having count(*) >= 2;
+
+101. Write a query in SQL to list the no. of employees in each department where the no. is less than 4.
+		select deptno, count(deptno) as '# of employees'
+		from emp
+		group by deptno
+		having count(deptno) < 4;
+
+102. Write a query in SQL to list the name of departments where atleast 2 employees are working in that department.
+		select e.deptno, d.dname, count(e.deptno) as '# of employees'
+		from emp e inner join dept d on e.deptno = d.deptno
+		group by e.deptno
+		having count(e.deptno) >= 2;
+		
+103. Write a query in SQL to check whether all the employees numbers are indeed unique.
+		select empno, ename,
+		count(*)
+		from emp
+		group by empno;
+
+104. Write a query in SQL to list the no. of employees and average salary within each department for each job name.
+		select d.dname, e.job, count(e.empno) as '# of employees', round(avg(e.sal), 2) avgsal
+		from emp e inner join dept d on e.deptno = d.deptno
+		group by d.dname, e.job;
+
+105. Write a query in SQL to list the names of those employees starting with 'A' and with six characters in length.
+		select empno, ename, hiredate
+		from emp
+		where length(ename) = 6 and ename like 'A%';
+
+106. Write a query in SQL to list the employees whose name is six characters in length and third character must be 'R'. 
+		select empno, ename
+		from emp
+		where length(ename) = 6 and ename like '___R%';
+
+107. Write a query in SQL to list the name of the employee of six characters long and starting with 'A' and ending with 'N'.
+		select empno, ename
+		from emp
+		where length(ename) = 6 and ename like 'A%N'; / where ename like 'A____N';
+
+108. Write a query in SQL to list the employees who joined in the month of which second character is 'a'.
+		select empno, ename, hiredate
+		from emp
+		where monthname(hiredate) like '_a%';
+
+109. Write a query in SQL to list the employees whose names containing the character set 'AR' together.
+		select empno, ename
+		from emp
+		where ename like '%AR%';
+
+110. Write a query in SQL to list the employees those who joined in 90s.
+		select empno, ename, hiredate
+		from emp
+		where year(hiredate) between 1990 and 1999;
+
+111. Write a query in SQL to list the employees whose ID not starting with digit 78.
+		select empno
+		from emp
+		where empno not like '78%';
+
+112. Write a query in SQL to list the employees whose names containing the letter 'A'.
+		select empno, ename
+		from emp
+		where ename like '%A%';
+
+113. Write a query in SQL to list the employees whose name is ending with 'S' and six characters long.
+		select empno, ename
+		from emp
+		where ename like '%S' and length(ename) = 6;
+
+114. Write a query in SQL to list the employees who joined in the month having char 'A' at any position.
+		select empno, ename, hiredate
+		from emp
+		where monthname(hiredate) like '%A%';
+
+115. Write a query in SQL to list the employees who joined in the month having second char is 'A'.
+		select empno, ename, hiredate
+		from emp
+		where monthname(hiredate) like '__A%';
